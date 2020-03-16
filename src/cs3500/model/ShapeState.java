@@ -10,6 +10,7 @@ import java.util.Objects;
 public class ShapeState {
 
   private final int tick;
+  private final ShapeType t;
   private final Position p;
   private final Dimension d;
   private final Color c;
@@ -22,20 +23,34 @@ public class ShapeState {
    * @param d    Dimension
    * @param c    Color
    */
-  public ShapeState(int tick, Position p, Dimension d, Color c) {
+  public ShapeState(int tick, ShapeType t, Position p, Dimension d, Color c) {
     if (tick < 0) {
       throw new IllegalArgumentException("Invalid Tick");
     }
     this.tick = tick;
+    this.t = t;
     this.p = new Position(p);
     this.d = new Dimension(d);
     this.c = new Color(c.getRGB());
   }
 
+  /**
+   * Copy Constructor for ShapeState.
+   *
+   * @param s ShapeState to copy from
+   */
+  public ShapeState(ShapeState s) {
+    this.tick = s.tick;
+    this.t = s.t;
+    this.p = new Position(s.p);
+    this.d = new Dimension(s.d);
+    this.c = new Color(s.c.getRGB());
+  }
+
   @Override
   public String toString() {
     return tick + " " + p.toString() +
-        " " + d.toString() + c.getRed() +
+        " " + d.toString() + " " + c.getRed() +
         " " + c.getGreen() + " " + c.getBlue();
   }
 
@@ -46,6 +61,18 @@ public class ShapeState {
    */
   public Position getP() {
     return this.p;
+  }
+
+  public Dimension getD() {
+    return this.d;
+  }
+
+  public Color getC() {
+    return this.c;
+  }
+
+  public ShapeType getT() {
+    return this.t;
   }
 
   @Override
@@ -62,7 +89,7 @@ public class ShapeState {
       return false;
     }
     ShapeState temp = (ShapeState) obj;
-    return (temp.tick == this.tick && temp.getP().equals(this.p)
+    return (temp.tick == this.tick && temp.t.equals(this.t) && temp.p.equals(this.p)
         && temp.d.equals(this.d) && temp.c.equals(this.c));
   }
 }

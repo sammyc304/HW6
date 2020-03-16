@@ -1,6 +1,7 @@
 package cs3500.model;
 
 import java.awt.Color;
+import java.util.Map;
 
 /**
  * AnimationModelInterface is used to represent a series of shapes moving in a frame at different
@@ -21,6 +22,15 @@ public interface AnimationModelInterface {
    * @param name shape to be retrieved
    */
   Shape getShape(String name);
+
+  Dimension getDimension();
+
+  Position getPosition();
+
+  /**
+   * getElements returns the map.
+   */
+  Map<String, Shape> getElements();
 
   /**
    * modifyShape changes the characteristics of a specific shape in the frame.

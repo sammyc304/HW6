@@ -14,8 +14,12 @@ public class BasicAMI implements AnimationModelInterface {
    * Only data field, represents the current list of shapes.
    */
   private final Map<String, Shape> elements;
+  private Dimension dim;
+  private Position pos;
 
-  public BasicAMI() {
+  public BasicAMI(Dimension dim, Position pos) {
+    this.dim = dim;
+    this.pos = pos;
     this.elements = new HashMap<>();
   }
 
@@ -31,6 +35,20 @@ public class BasicAMI implements AnimationModelInterface {
     }
 
     return elements.get(name);
+  }
+
+  @Override
+  public Dimension getDimension() {
+    return dim;
+  }
+
+  @Override
+  public Position getPosition() {
+    return pos;
+  }
+
+  public Map<String, Shape> getElements() {
+    return elements;
   }
 
   @Override
