@@ -2,6 +2,8 @@ package cs3500.animator.view;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -34,7 +36,11 @@ public class AMIPanel extends JPanel {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
+    Collections.sort(shapes);
     for (ShapeState s : shapes) {
+      if (s == null) {
+        continue;
+      }
       Function<ShapeState, ShapeCommand> cmd = commands.get(s.getT());
       ShapeCommand sc = cmd.apply(s);
       sc.go(g2d);

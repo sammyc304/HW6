@@ -27,6 +27,10 @@ public interface AnimationModelInterface {
 
   Position getPosition();
 
+  int getResolution();
+
+  int getSpeed();
+
   /**
    * getElements returns the map.
    */

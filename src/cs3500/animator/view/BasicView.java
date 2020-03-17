@@ -26,16 +26,6 @@ public class BasicView extends JFrame implements AMIView {
     this.add(panel);
   }
 
-  /*private void extrapolateShapes(){
-    BasicAMI m = new BasicAMI(model.getDimension(),model.getPosition());
-    for(Map.Entry<String, Shape> e : model.getElements().entrySet()){
-      Shape s = new Shape(e.getValue().getName(),e.getValue().getShapeType());
-      for(Map.Entry<Integer, ShapeState> x : e.getValue().getLog().entrySet()){
-        //s.setNewState();
-      }
-    }
-  }*/
-
   @Override
   public void view() throws InterruptedException {
     int tick = 0;
@@ -44,13 +34,18 @@ public class BasicView extends JFrame implements AMIView {
       ArrayList<ShapeState> arr = new ArrayList<>();
       int size = 0;
       for (Map.Entry<String, Shape> e : model.getElements().entrySet()) {
-        arr.add(e.getValue().getLog().get(tick));
-        if (e.getValue().getLog().size() > size) {
-          size = e.getValue().getLog().size();
+        try {
+          if (e.getValue().getLog().get(tick) != null) {
+            arr.add(e.getValue().getLog().get(tick));
+          }
+          if (e.getValue().getRecentTick() > size) {
+            size = e.getValue().getRecentTick();
+          }
+        } catch (Exception ignored) {
         }
       }
       panel.update(arr);
-      TimeUnit.MILLISECONDS.sleep(10);
+      TimeUnit.MICROSECONDS.sleep((1000000 / model.getSpeed()) / model.getResolution());
       this.repaint();
       tick++;
       tick %= size;

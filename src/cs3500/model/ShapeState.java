@@ -7,7 +7,7 @@ import java.util.Objects;
  * ShapeState represents a shape at a single moment. A list of these make up the lifespan of a
  * shape.
  */
-public class ShapeState {
+public class ShapeState implements Comparable {
 
   private final int tick;
   private final ShapeType t;
@@ -67,6 +67,10 @@ public class ShapeState {
     return this.d;
   }
 
+  private int getSize() {
+    return d.getH() * d.getW();
+  }
+
   public Color getC() {
     return this.c;
   }
@@ -91,5 +95,16 @@ public class ShapeState {
     ShapeState temp = (ShapeState) obj;
     return (temp.tick == this.tick && temp.t.equals(this.t) && temp.p.equals(this.p)
         && temp.d.equals(this.d) && temp.c.equals(this.c));
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    ShapeState s = (ShapeState) o;
+    if (this.getSize() > s.getSize()) {
+      return -1;
+    } else if (this.getSize() == s.getSize()) {
+      return 0;
+    }
+    return 1;
   }
 }

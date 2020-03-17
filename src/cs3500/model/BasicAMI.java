@@ -16,15 +16,20 @@ public class BasicAMI implements AnimationModelInterface {
   private final Map<String, Shape> elements;
   private Dimension dim;
   private Position pos;
+  private final int resolution;
+  private final int speed;
 
-  public BasicAMI(Dimension dim, Position pos) {
+  public BasicAMI(Dimension dim, Position pos, int resolution, int speed) {
     this.dim = dim;
     this.pos = pos;
+    this.resolution = resolution;
+    this.speed = speed;
     this.elements = new HashMap<>();
   }
 
   @Override
   public void addShape(Shape s) {
+    s.setResolution(resolution);
     elements.put(s.getName(), s);
   }
 
@@ -45,6 +50,15 @@ public class BasicAMI implements AnimationModelInterface {
   @Override
   public Position getPosition() {
     return pos;
+  }
+
+  @Override
+  public int getResolution() {
+    return resolution;
+  }
+
+  public int getSpeed() {
+    return speed;
   }
 
   public Map<String, Shape> getElements() {
