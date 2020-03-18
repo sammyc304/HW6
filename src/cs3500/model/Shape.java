@@ -1,7 +1,6 @@
 package cs3500.model;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,6 +15,7 @@ public class Shape {
   private final ShapeType s;
   private int resolution;
   private int recentTick;
+  private StringBuilder log_str = new StringBuilder();
 
   /**
    * Constructor for shape class.
@@ -28,6 +28,12 @@ public class Shape {
     this.recentTick = 0;
   }
 
+  /**
+   * Overloaded constructor for Shape.
+   *
+   * @param name Name of shape
+   * @param type String type of shape
+   */
   public Shape(String name, String type) {
     this.name = name;
     switch (type) {
@@ -44,15 +50,50 @@ public class Shape {
     this.recentTick = 0;
   }
 
+  /**
+   * Sets the resolution of the shape
+   *
+   * @param resolution Resolution used for shape
+   */
   public void setResolution(int resolution) {
     this.resolution = resolution;
   }
 
-  public void setNewState(String tick, String px, String py, String dh, String dw,
-                          String cr, String cg, String cb) {
-    setNewState(Integer.parseInt(tick), new Position(Integer.parseInt(px), Integer.parseInt(py)),
-        new Dimension(Integer.parseInt(dh), Integer.parseInt(dw)), new Color(Integer.parseInt(cr),
-            Integer.parseInt(cg), Integer.parseInt(cb)));
+  /**
+   * Sets a new state for the shape, taking only string inputs
+   *
+   * @param tick1 First tick
+   * @param px1   First x position
+   * @param py1   First y position
+   * @param dh1   First height
+   * @param dw1   First width
+   * @param cr1   First red component
+   * @param cg1   First green component
+   * @param cb1   First blue component
+   * @param tick2 Second tick
+   * @param px2   Second x position
+   * @param py2   Second y position
+   * @param dh2   Second height
+   * @param dw2   Second width
+   * @param cr2   Second red component
+   * @param cg2   Second green component
+   * @param cb2   Second blue component
+   */
+  public void setNewState(String tick1, String px1, String py1, String dh1, String dw1,
+                          String cr1, String cg1, String cb1, String tick2, String px2, String py2,
+                          String dh2, String dw2, String cr2, String cg2, String cb2) {
+    log_str.append("motion ").append(name).append(" ").append(tick1).append(" ").append(px1).
+        append(" ").append(py1).append(" ").append(dh1).append(" ").append(dw1).append(" ").
+        append(cr1).append(" ").append(cg1).append(" ").append(cb1).append(" ").append(tick2).
+        append(" ").append(px2).append(" ").append(py2).append(" ").append(dh2).append(" ").
+        append(dw2).append(" ").append(cr2).append(" ").append(cg2).append(" ").append(cb2).
+        append("\n");
+    setNewState(Integer.parseInt(tick1), new Position(Integer.parseInt(px1),
+            Integer.parseInt(py1)), new Dimension(Integer.parseInt(dh1), Integer.parseInt(dw1)),
+        new Color(Integer.parseInt(cr1), Integer.parseInt(cg1), Integer.parseInt(cb1)));
+    setNewState(Integer.parseInt(tick2), new Position(Integer.parseInt(px2),
+            Integer.parseInt(py2)), new Dimension(Integer.parseInt(dh2), Integer.parseInt(dw2)),
+        new Color(Integer.parseInt(cr2), Integer.parseInt(cg2), Integer.parseInt(cb2)));
   }
 
   /**
@@ -117,14 +158,29 @@ public class Shape {
     return name;
   }
 
+  /**
+   * Returns the ShapeType.
+   *
+   * @return s
+   */
   public ShapeType getShapeType() {
     return s;
   }
 
+  /**
+   * Returns the resolution.
+   *
+   * @return resolution
+   */
   public int getResolution() {
     return resolution;
   }
 
+  /**
+   * Returns the most recent tick added
+   *
+   * @return recentTick
+   */
   public int getRecentTick() {
     return recentTick;
   }
@@ -144,5 +200,11 @@ public class Shape {
     }
     Shape temp = (Shape) obj;
     return (temp.name.equals(this.name) && log.equals(this.log));
+  }
+
+  @Override
+  public String toString() {
+    return "shape " + name + " " + s.toString() + "\n" +
+        log_str.toString();
   }
 }

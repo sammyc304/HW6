@@ -23,14 +23,6 @@ public interface AnimationModelInterface {
    */
   Shape getShape(String name);
 
-  Dimension getDimension();
-
-  Position getPosition();
-
-  int getResolution();
-
-  int getSpeed();
-
   /**
    * getElements returns the map.
    */

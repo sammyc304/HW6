@@ -8,5 +8,5 @@ public interface AMIView {
   /**
    * Refresh the view to reflect any changes in the animator.
    */
-  void view() throws InterruptedException;
+  void view();
 }

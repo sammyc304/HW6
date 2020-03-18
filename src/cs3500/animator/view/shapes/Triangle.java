@@ -1,14 +1,22 @@
 package cs3500.animator.view.shapes;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 import cs3500.animator.view.ShapeCommand;
 import cs3500.model.ShapeState;
 
+/**
+ * Triangle implements Shape Command and paints a triangle with the given Shape State.
+ */
 public class Triangle implements ShapeCommand {
 
   private ShapeState s;
 
+  /**
+   * Constructor for Triangle.
+   *
+   * @param s Current shape state to be painted
+   */
   public Triangle(ShapeState s) {
     this.s = s;
   }

@@ -1,14 +1,22 @@
 package cs3500.animator.view.shapes;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 
 import cs3500.animator.view.ShapeCommand;
 import cs3500.model.ShapeState;
 
+/**
+ * Oval implements Shape Command and paints an oval with the given Shape State.
+ */
 public class Oval implements ShapeCommand {
 
   private ShapeState s;
 
+  /**
+   * Constructor for Oval shape command.
+   *
+   * @param s Current shape state to be painted
+   */
   public Oval(ShapeState s) {
     this.s = s;
   }

@@ -1,22 +1,23 @@
 package cs3500.animator.view;
 
-import java.awt.*;
+import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import cs3500.animator.view.shapes.Oval;
 import cs3500.animator.view.shapes.Rectangle;
 import cs3500.animator.view.shapes.Triangle;
-import cs3500.model.AnimationModelInterface;
-import cs3500.model.Shape;
 import cs3500.model.ShapeState;
 import cs3500.model.ShapeType;
 
+/**
+ * AMIPanel extends a JPanel. It is used in our view and updates with a new array of shape states.
+ */
 public class AMIPanel extends JPanel {
 
   private ArrayList<ShapeState> shapes;
@@ -24,10 +25,18 @@ public class AMIPanel extends JPanel {
       Map.of(ShapeType.OVAL, Oval::new, ShapeType.RECTANGLE, Rectangle::new,
           ShapeType.TRIANGLE, Triangle::new);
 
+  /**
+   * Constructor for AMIPanel.
+   */
   public AMIPanel() {
     this.shapes = new ArrayList<>();
   }
 
+  /**
+   * update changes the stored list of shapes to be painted on panel.
+   *
+   * @param s New list of shapes
+   */
   public void update(ArrayList<ShapeState> s) {
     this.shapes = (ArrayList<ShapeState>) s.clone();
   }

@@ -4,30 +4,39 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
 import cs3500.model.AnimationModelInterface;
 import cs3500.model.BasicAMI;
 import cs3500.model.Shape;
 import cs3500.model.ShapeState;
 
+/**
+ * BasicView extends JFrame and implements AMIView. This shows the animation moving in a JFrame.
+ */
 public class BasicView extends JFrame implements AMIView {
 
   private AMIPanel panel;
-  private AnimationModelInterface model;
+  private BasicAMI model;
 
+  /**
+   * Constructor for BasicView.
+   *
+   * @param windowTitle Title of animation window
+   * @param m           Model used to control animation
+   */
   public BasicView(String windowTitle, AnimationModelInterface m) {
     super(windowTitle);
-    setSize(m.getDimension().getW(), m.getDimension().getH());
-    setLocation(m.getPosition().getX(), m.getPosition().getY());
+    model = (BasicAMI) m;
+    setSize(model.getDimension().getW(), model.getDimension().getH());
+    setLocation(model.getPosition().getX(), model.getPosition().getY());
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    model = m;
     panel = new AMIPanel();
     this.add(panel);
   }
 
   @Override
-  public void view() throws InterruptedException {
+  public void view() {
     int tick = 0;
     while (true) {
       this.setVisible(true);
@@ -45,7 +54,10 @@ public class BasicView extends JFrame implements AMIView {
         }
       }
       panel.update(arr);
-      TimeUnit.MICROSECONDS.sleep((1000000 / model.getSpeed()) / model.getResolution());
+      try {
+        TimeUnit.MICROSECONDS.sleep((1000000 / model.getSpeed()) / model.getResolution());
+      } catch (InterruptedException ignored) {
+      }
       this.repaint();
       tick++;
       tick %= size;

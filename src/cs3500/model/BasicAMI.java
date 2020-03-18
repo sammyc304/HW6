@@ -19,6 +19,14 @@ public class BasicAMI implements AnimationModelInterface {
   private final int resolution;
   private final int speed;
 
+  /**
+   * Constructor for BasicAMI.
+   *
+   * @param dim        Dimensions of animation
+   * @param pos        Position of animation
+   * @param resolution Resolution of animation
+   * @param speed      Speed of resolution
+   */
   public BasicAMI(Dimension dim, Position pos, int resolution, int speed) {
     this.dim = dim;
     this.pos = pos;
@@ -42,25 +50,43 @@ public class BasicAMI implements AnimationModelInterface {
     return elements.get(name);
   }
 
-  @Override
+  /**
+   * Returns dimensions of animation
+   *
+   * @return dim
+   */
   public Dimension getDimension() {
     return dim;
   }
 
-  @Override
+  /**
+   * Returns position of animation
+   *
+   * @return pos
+   */
   public Position getPosition() {
     return pos;
   }
 
-  @Override
+  /**
+   * Returns resolution of animation
+   *
+   * @return resolution
+   */
   public int getResolution() {
     return resolution;
   }
 
+  /**
+   * Returns speed of animation
+   *
+   * @return speed
+   */
   public int getSpeed() {
     return speed;
   }
 
+  @Override
   public Map<String, Shape> getElements() {
     return elements;
   }
@@ -89,19 +115,10 @@ public class BasicAMI implements AnimationModelInterface {
   @Override
   public String textOutput() {
     StringBuilder ret_val = new StringBuilder();
+    ret_val.append("canvas ").append(pos.getX()).append(" ").append(pos.getY()).append(" ").
+        append(dim.getH()).append(" ").append(dim.getW()).append("\n");
     for (Map.Entry<String, Shape> entry : elements.entrySet()) {
-      ret_val.append("\n").append("shape ").append(entry.getKey()).append(" ")
-          .append(entry.getValue().getShapeType().toString()).append("\n\n");
-      int size = entry.getValue().getLog().size();
-      for (int i = 0; i < size; ++i) {
-        if (i < size - 1) {
-          ret_val.append("motion ").append(entry.getKey()).append(" ").
-              append(entry.getValue().getLog().get(i).toString());
-          ret_val.append("   ").append("motion ").append(entry.getKey()).append(" ").
-              append(entry.getValue().getLog().get(i + 1).toString());
-        }
-        ret_val.append("\n");
-      }
+      ret_val.append(entry.getValue().toString());
     }
     return ret_val.toString();
   }
