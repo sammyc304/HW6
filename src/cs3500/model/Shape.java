@@ -1,6 +1,7 @@
 package cs3500.model;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -8,7 +9,7 @@ import java.util.Objects;
 /**
  * Shape represents an element within our animation model.
  */
-public class Shape {
+public class Shape implements Comparable {
 
   private final Map<Integer, ShapeState> log = new HashMap<>();
   private final String name;
@@ -16,6 +17,7 @@ public class Shape {
   private int resolution;
   private int recentTick;
   private StringBuilder log_str = new StringBuilder();
+  private double average_size;
 
   /**
    * Constructor for shape class.
@@ -26,6 +28,7 @@ public class Shape {
     this.name = name;
     this.s = s;
     this.recentTick = 0;
+    this.average_size = 0;
   }
 
   /**
@@ -48,6 +51,14 @@ public class Shape {
         break;
     }
     this.recentTick = 0;
+  }
+
+  private void updateSize() {
+    int sum = 0;
+    for (Map.Entry<Integer, ShapeState> e : log.entrySet()) {
+      sum += e.getValue().getD().getH() * e.getValue().getD().getW();
+    }
+    average_size = (double) sum / (double) log.size();
   }
 
   /**
@@ -138,6 +149,7 @@ public class Shape {
       log.put(i, new ShapeState(i, s, new_p, new_d, new_c));
     }
     recentTick = tick;
+    updateSize();
   }
 
   /**
@@ -156,6 +168,33 @@ public class Shape {
    */
   public String getName() {
     return name;
+  }
+
+  /**
+   * getLogStr returns the string log.
+   *
+   * @return String, log_str
+   */
+  public String getLogStr() {
+    return log_str.toString();
+  }
+
+  /**
+   * getTokenData returns the string log as tokens.
+   *
+   * @return String, ret_val
+   */
+  public ArrayList<ArrayList<Integer>> getTokenData() {
+    ArrayList<ArrayList<Integer>> ret_val = new ArrayList<>();
+    String[] lines = log_str.toString().split("\\r?\\n");
+    for (int i = 1; i < lines.length; ++i) {
+      ret_val.add(new ArrayList<>());
+      String[] line = lines[i].split(" ");
+      for (int j = 2; j < line.length; ++j) {
+        ret_val.get(i - 1).add(Integer.parseInt(line[j]));
+      }
+    }
+    return ret_val;
   }
 
   /**
@@ -206,5 +245,16 @@ public class Shape {
   public String toString() {
     return "shape " + name + " " + s.toString() + "\n" +
         log_str.toString();
+  }
+
+  @Override
+  public int compareTo(Object o) {
+    Shape s = (Shape) o;
+    if (this.average_size > s.average_size) {
+      return -1;
+    } else if (this.average_size == s.average_size) {
+      return 0;
+    }
+    return 1;
   }
 }

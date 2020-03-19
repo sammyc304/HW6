@@ -63,7 +63,9 @@ public class Main {
 
     AMIView tView = new TextView(model);
     AMIView bView = new BasicView("Animation", model);
+    AMIView sView = new SVGView(model, 1.1, "http://www.w3.org/2000/svg", 100); //Speed should be powers of 10, higher means slower
 
+    sView.view();
     tView.view();
     bView.view();
   }
