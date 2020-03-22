@@ -8,6 +8,7 @@ public interface AnimationBuilder<Doc> {
    */
   Doc build();
 
+  void setSpeed(int speed);
 
   /**
    * Specify the bounding box to be used for the animation.

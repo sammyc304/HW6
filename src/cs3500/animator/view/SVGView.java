@@ -7,24 +7,89 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
+import cs3500.animator.util.AnimationBuilder;
 import cs3500.model.AnimationModelInterface;
 import cs3500.model.BasicAMI;
+import cs3500.model.Dimension;
+import cs3500.model.Position;
 import cs3500.model.Shape;
 
 public class SVGView implements AMIView {
 
   private BasicAMI model;
-  private StringBuilder file;
+  private StringBuilder file = new StringBuilder();
   private final double version;
   private final String web;
   private final int speed;
+  private final String out;
 
-  public SVGView(AnimationModelInterface m, double version, String web, int speed) {
+  public static final class Builder implements AnimationBuilder<AMIView> {
+
+    private BasicAMI model = null;
+    private double version = 1.1;
+    private String web = "http://www.w3.org/2000/svg";
+    private int speed;
+    private String out;
+
+    public static Builder newInstance() {
+      return new Builder();
+    }
+
+    private Builder() {
+    }
+
+    @Override
+    public void setSpeed(int speed) {
+      this.speed = speed;
+    }
+
+    public void setOut(String out) {
+      this.out = out;
+    }
+
+    @Override
+    public AMIView build() {
+      return new SVGView(this);
+    }
+
+    @Override
+    public AnimationBuilder<AMIView> setBounds(int x, int y, int width, int height) {
+      model = new BasicAMI(new Dimension(width, height), new Position(x, y), 10, speed);
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AMIView> declareShape(String name, String type) {
+      model.addShape(new Shape(name, type));
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AMIView> addMotion(String name, int t1, int x1, int y1, int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2, int g2, int b2) {
+      model.getShape(name).setNewState(t1, x1, y1, h1, w1, r1, g1, b1, t2, x2, y2, h2, w2, r2, g2, b2);
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AMIView> addKeyframe(String name, int t, int x, int y, int w, int h, int r, int g, int b) {
+      throw new IllegalStateException("Don't use this");
+    }
+  }
+
+  public SVGView(AnimationModelInterface m, double version, String web) {
     this.model = (BasicAMI) m;
-    file = new StringBuilder();
     this.version = version;
     this.web = web;
-    this.speed = speed;
+    this.speed = 1000 / model.getSpeed();
+    this.out = "SVG.svg";
+  }
+
+  public SVGView(Builder b) {
+    this.model = b.model;
+    this.version = b.version;
+    this.web = b.web;
+    this.speed = 1000 / model.getSpeed();
+    this.out = b.out;
   }
 
   private void setFrame(int width, int height, double version, String web) {
@@ -124,7 +189,7 @@ public class SVGView implements AMIView {
 
   @Override
   public void view() {
-    setFrame(model.getDimension().getW() * 10, model.getDimension().getH() * 10, version, web);
+    setFrame(model.getDimension().getW(), model.getDimension().getH(), version, web);
     ArrayList<Shape> s = new ArrayList<Shape>(model.getElements().values());
     Collections.sort(s);
     for (Shape x : s) {
@@ -132,7 +197,7 @@ public class SVGView implements AMIView {
     }
     file.append("</svg>\n");
     try {
-      FileWriter myWriter = new FileWriter("src/cs3500/resources/SVGView.svg");
+      FileWriter myWriter = new FileWriter("src/cs3500/resources/" + out);
       myWriter.write(file.toString());
       myWriter.close();
     } catch (IOException e) {

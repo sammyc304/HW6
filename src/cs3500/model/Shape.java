@@ -70,6 +70,16 @@ public class Shape implements Comparable {
     this.resolution = resolution;
   }
 
+  public void setNewState(int tick1, int px1, int py1, int dh1, int dw1,
+                          int cr1, int cg1, int cb1, int tick2, int px2, int py2,
+                          int dh2, int dw2, int cr2, int cg2, int cb2) {
+    setNewState(Integer.toString(tick1), Integer.toString(px1), Integer.toString(py1),
+        Integer.toString(dh1), Integer.toString(dw1), Integer.toString(cr1), Integer.toString(cg1),
+        Integer.toString(cb1), Integer.toString(tick2), Integer.toString(px2),
+        Integer.toString(py2), Integer.toString(dh2), Integer.toString(dw2), Integer.toString(cr2),
+        Integer.toString(cg2), Integer.toString(cb2));
+  }
+
   /**
    * Sets a new state for the shape, taking only string inputs
    *

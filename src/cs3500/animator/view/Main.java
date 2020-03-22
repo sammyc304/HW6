@@ -38,7 +38,7 @@ public class Main {
           case "canvas":
             model = new BasicAMI(new Dimension(Integer.parseInt(tokens[3]),
                 Integer.parseInt(tokens[4])), new Position(Integer.parseInt(tokens[1]),
-                Integer.parseInt(tokens[2])), 10, 100);
+                Integer.parseInt(tokens[2])), 10, 1);
             break;
           case "shape":
             if (model != null) {
@@ -63,7 +63,7 @@ public class Main {
 
     AMIView tView = new TextView(model);
     AMIView bView = new BasicView("Animation", model);
-    AMIView sView = new SVGView(model, 1.1, "http://www.w3.org/2000/svg", 100); //Speed should be powers of 10, higher means slower
+    AMIView sView = new SVGView(model, 1.1, "http://www.w3.org/2000/svg"); //Speed should be powers of 10, higher means slower
 
     sView.view();
     tView.view();
