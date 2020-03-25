@@ -10,6 +10,9 @@ public final class Dimension {
   private final int h;
   private final int w;
 
+  /**
+   * Constructor for Dimension.
+   */
   public Dimension() {
     this.h = 0;
     this.w = 0;
@@ -29,6 +32,11 @@ public final class Dimension {
     this.w = w;
   }
 
+  /**
+   * Copy constructor for dimension.
+   *
+   * @param dim Dimension to copy
+   */
   public Dimension(Dimension dim) {
     this.h = dim.h;
     this.w = dim.w;

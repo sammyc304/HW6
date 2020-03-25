@@ -8,6 +8,11 @@ public interface AnimationBuilder<Doc> {
    */
   Doc build();
 
+  /**
+   * Sets the speed of the animation.
+   *
+   * @param speed Speed
+   */
   void setSpeed(int speed);
 
   /**

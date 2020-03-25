@@ -9,7 +9,16 @@ import cs3500.animator.view.BasicView;
 import cs3500.animator.view.SVGView;
 import cs3500.animator.view.TextView;
 
+/**
+ * Class to run our animator from. It uses a main function that takes command line args.
+ */
 public final class Excellence {
+
+  /**
+   * Main method to run our animator from.
+   *
+   * @param args Command line args
+   */
   public static void main(String[] args) {
     String fileName = "";
     String fileOut = "";

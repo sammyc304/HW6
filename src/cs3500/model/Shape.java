@@ -63,7 +63,7 @@ public class Shape implements Comparable {
   }
 
   /**
-   * Sets the resolution of the shape
+   * Sets the resolution of the shape.
    *
    * @param resolution Resolution used for shape
    */
@@ -71,6 +71,26 @@ public class Shape implements Comparable {
     this.resolution = resolution;
   }
 
+  /**
+   * Sets a new state, using integer.
+   *
+   * @param tick1 First tick
+   * @param px1   First x
+   * @param py1   First y
+   * @param dh1   First height
+   * @param dw1   First width
+   * @param cr1   First red
+   * @param cg1   First green
+   * @param cb1   First blue
+   * @param tick2 Second tick
+   * @param px2   Second x
+   * @param py2   Second y
+   * @param dh2   Second height
+   * @param dw2   Second width
+   * @param cr2   Second red
+   * @param cg2   Second green
+   * @param cb2   Second blue
+   */
   public void setNewState(int tick1, int px1, int py1, int dh1, int dw1,
                           int cr1, int cg1, int cb1, int tick2, int px2, int py2,
                           int dh2, int dw2, int cr2, int cg2, int cb2) {
@@ -198,7 +218,7 @@ public class Shape implements Comparable {
   public ArrayList<ArrayList<Integer>> getTokenData() {
     ArrayList<ArrayList<Integer>> ret_val = new ArrayList<>();
     String[] lines = log_str.toString().split("\\r?\\n");
-    if(lines.length == 1) {
+    if (lines.length == 1) {
       ret_val.add(new ArrayList<>());
       String[] line = log_str.toString().split(" ");
       for (int j = 2; j < line.length; ++j) {

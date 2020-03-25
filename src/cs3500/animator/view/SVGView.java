@@ -1,11 +1,9 @@
 package cs3500.animator.view;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Map;
 
 import cs3500.animator.util.AnimationBuilder;
 import cs3500.model.AnimationModelInterface;
@@ -14,6 +12,9 @@ import cs3500.model.Dimension;
 import cs3500.model.Position;
 import cs3500.model.Shape;
 
+/**
+ * SVGView implements AMIView, to output view as SVG file.
+ */
 public class SVGView implements AMIView {
 
   private BasicAMI model;
@@ -23,6 +24,9 @@ public class SVGView implements AMIView {
   private final int speed;
   private final String out;
 
+  /**
+   * Builder class for SVGView.
+   */
   public static final class Builder implements AnimationBuilder<AMIView> {
 
     private BasicAMI model = null;
@@ -31,6 +35,11 @@ public class SVGView implements AMIView {
     private int speed;
     private String out;
 
+    /**
+     * Returns new instance of Builder.
+     *
+     * @return Builder
+     */
     public static Builder newInstance() {
       return new Builder();
     }
@@ -43,6 +52,11 @@ public class SVGView implements AMIView {
       this.speed = speed;
     }
 
+    /**
+     * Sets the name of the output file.
+     *
+     * @param out Outfile name
+     */
     public void setOut(String out) {
       this.out = out;
     }
@@ -76,6 +90,13 @@ public class SVGView implements AMIView {
     }
   }
 
+  /**
+   * Constructor for SVGView.
+   *
+   * @param m       Model
+   * @param version Version number
+   * @param web     Web address used
+   */
   public SVGView(AnimationModelInterface m, double version, String web) {
     this.model = (BasicAMI) m;
     this.version = version;
@@ -84,6 +105,11 @@ public class SVGView implements AMIView {
     this.out = "SVG.svg";
   }
 
+  /**
+   * Constructor using Builder class.
+   *
+   * @param b Builder
+   */
   public SVGView(Builder b) {
     this.model = b.model;
     this.version = b.version;
@@ -103,8 +129,8 @@ public class SVGView implements AMIView {
       case OVAL:
         file.append("\t<ellipse id=\"").append(s.getName()).append("\" cx=\"").
             append(data.get(0).get(1))
-                .append("\" cy=\"")
-                .append(data.get(0).get(2)).
+            .append("\" cy=\"")
+            .append(data.get(0).get(2)).
             append("\" rx=\"").append(data.get(0).get(4)).append("\" ry=\"").
             append(data.get(0).get(3)).append("\" fill=\"transparent\">\n");
         for (ArrayList<Integer> a : data) {
@@ -163,12 +189,12 @@ public class SVGView implements AMIView {
                     append("\"/>\n");
                 break;
               case 3:
-                file.append("width\" from=\"").append(a.get(4)).append("\" to=\"").append(a.get(12)).
-                    append("\"/>\n");
+                file.append("width\" from=\"").append(a.get(4)).append("\" to=\"").
+                    append(a.get(12)).append("\"/>\n");
                 break;
               case 4:
-                file.append("height\" from=\"").append(a.get(3)).append("\" to=\"").append(a.get(11)).
-                    append("\"/>\n");
+                file.append("height\" from=\"").append(a.get(3)).append("\" to=\"").
+                    append(a.get(11)).append("\"/>\n");
                 break;
               case 5:
                 file.append("fill\" from=\"rgb(").append(a.get(5)).
