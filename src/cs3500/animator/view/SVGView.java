@@ -102,7 +102,9 @@ public class SVGView implements AMIView {
     switch (s.getShapeType()) {
       case OVAL:
         file.append("\t<ellipse id=\"").append(s.getName()).append("\" cx=\"").
-            append(data.get(0).get(1)).append("\" cy=\"").append(data.get(0).get(2)).
+            append(data.get(0).get(1))
+                .append("\" cy=\"")
+                .append(data.get(0).get(2)).
             append("\" rx=\"").append(data.get(0).get(4)).append("\" ry=\"").
             append(data.get(0).get(3)).append("\" fill=\"transparent\">\n");
         for (ArrayList<Integer> a : data) {

@@ -38,7 +38,7 @@ public class Main {
           case "canvas":
             model = new BasicAMI(new Dimension(Integer.parseInt(tokens[3]),
                 Integer.parseInt(tokens[4])), new Position(Integer.parseInt(tokens[1]),
-                Integer.parseInt(tokens[2])), 10, 1);
+                Integer.parseInt(tokens[2])), 10, 1000);
             break;
           case "shape":
             if (model != null) {

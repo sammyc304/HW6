@@ -60,6 +60,8 @@ public class TextView implements AMIView {
     }
   }
 
+  private String view;
+
   /**
    * Constructor for TextView.
    *
@@ -67,14 +69,21 @@ public class TextView implements AMIView {
    */
   public TextView(AnimationModelInterface m) {
     this.model = m;
+    this.view = "";
   }
 
   public TextView(Builder b) {
     this.model = b.model;
+    this.view = "";
   }
 
   @Override
   public void view() {
+    this.view = model.textOutput();
     System.out.print(model.textOutput());
+  }
+
+  public String getTextView() {
+    return this.view;
   }
 }

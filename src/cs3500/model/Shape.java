@@ -51,6 +51,7 @@ public class Shape implements Comparable {
         break;
     }
     this.recentTick = 0;
+    this.average_size = 0;
   }
 
   private void updateSize() {
@@ -197,11 +198,19 @@ public class Shape implements Comparable {
   public ArrayList<ArrayList<Integer>> getTokenData() {
     ArrayList<ArrayList<Integer>> ret_val = new ArrayList<>();
     String[] lines = log_str.toString().split("\\r?\\n");
-    for (int i = 1; i < lines.length; ++i) {
+    if(lines.length == 1) {
       ret_val.add(new ArrayList<>());
-      String[] line = lines[i].split(" ");
+      String[] line = log_str.toString().split(" ");
       for (int j = 2; j < line.length; ++j) {
-        ret_val.get(i - 1).add(Integer.parseInt(line[j]));
+        ret_val.get(0).add(Integer.parseInt(line[j].trim()));
+      }
+    } else {
+      for (int i = 1; i < lines.length; ++i) {
+        ret_val.add(new ArrayList<>());
+        String[] line = lines[i].split(" ");
+        for (int j = 2; j < line.length; ++j) {
+          ret_val.get(i - 1).add(Integer.parseInt(line[j]));
+        }
       }
     }
     return ret_val;
