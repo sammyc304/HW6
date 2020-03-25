@@ -69,6 +69,7 @@ public class SVGViewTest {
     ami1.addShape(testShapeRectangle);
     testShapeRectangle.setNewState(1,1,1,1,1,1,
             1,1,1,1,1,1,1,1,1,1);
+    String[] lines = testShapeRectangle.getLogStr().split("\\r?\\n");
     testSvgView.view();
     assertEquals(svgString("src/cs3500/resources/SVG.svg"),
             "<svg width=\"500\" height=\"500\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
@@ -81,6 +82,34 @@ public class SVGViewTest {
                     "</rect>\n" +
                     "</svg>\n");
 
+  }
+
+  @Test
+  public void svgViewAnimationTest() {
+    ami1.addShape(testShapeRectangle);
+    testShapeRectangle.setNewState(1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1);
+    testShapeRectangle.setNewState(1,1,1,1,1,1,
+            1,1,2,2,2,2,2,2,2,2);
+    testShapeRectangle.setNewState(2,2,2,2,2,2,
+            2,2,3,3,3,3,3,3,3,3);
+    String[] lines = testShapeRectangle.getLogStr().split("\\r?\\n");
+    testSvgView.view();
+    assertEquals(svgString("src/cs3500/resources/SVG.svg"),
+            "<svg width=\"500\" height=\"500\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                    "\t<rect id=\"testShape1Rect\" x=\"1\" y=\"1\" width=\"1\" height=\"1\" fill=\"transparent\">\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"100.0ms\" dur=\"100.0ms\" attributeName=\"x\" from=\"1\" to=\"2\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"100.0ms\" dur=\"100.0ms\" attributeName=\"y\" from=\"1\" to=\"2\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"100.0ms\" dur=\"100.0ms\" attributeName=\"width\" from=\"1\" to=\"2\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"100.0ms\" dur=\"100.0ms\" attributeName=\"height\" from=\"1\" to=\"2\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"100.0ms\" dur=\"100.0ms\" attributeName=\"fill\" from=\"rgb(1,1,1)\" to=\"rgb(2,2,2)\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"200.0ms\" dur=\"100.0ms\" attributeName=\"x\" from=\"2\" to=\"3\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"200.0ms\" dur=\"100.0ms\" attributeName=\"y\" from=\"2\" to=\"3\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"200.0ms\" dur=\"100.0ms\" attributeName=\"width\" from=\"2\" to=\"3\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"200.0ms\" dur=\"100.0ms\" attributeName=\"height\" from=\"2\" to=\"3\"/>\n" +
+                    "\t\t<animate attributeType=\"xml\" begin=\"200.0ms\" dur=\"100.0ms\" attributeName=\"fill\" from=\"rgb(2,2,2)\" to=\"rgb(3,3,3)\"/>\n" +
+                    "</rect>\n" +
+                    "</svg>\n");
   }
 
 

@@ -25,6 +25,20 @@ public class TextViewTest {
             "shape testShape1Circle rectangle\n");
   }
 
+  @Test
+  public void textViewAnimationTest() {
+    testShapeCircle.setNewState(1,1,1,1,1,1,
+            1,1,1,1,1,1,1,1,1,1);
+    testShapeCircle.setNewState(1,1,1,1,1,1,
+            2,2,2,2,2,2,2,2,2,2);
+    ami1.addShape(testShapeCircle);
+    testTextView.view();
+    assertEquals(testTextView.getTextView(), "canvas 200 200 500 500\n" +
+            "shape testShape1Circle rectangle\n" +
+            "motion testShape1Circle 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1\n" +
+            "motion testShape1Circle 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2\n");
+  }
+
 
 
 
