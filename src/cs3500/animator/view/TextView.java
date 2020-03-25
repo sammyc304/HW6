@@ -14,11 +14,19 @@ public class TextView implements AMIView {
 
   private AnimationModelInterface model;
 
+  /**
+   * Builder class for TextView.
+   */
   public static final class Builder implements AnimationBuilder<AMIView> {
 
     private AnimationModelInterface model = null;
     private int speed;
 
+    /**
+     * Returns an instance of Builder.
+     *
+     * @return Builder
+     */
     public static Builder newInstance() {
       return new Builder();
     }
@@ -72,6 +80,11 @@ public class TextView implements AMIView {
     this.view = "";
   }
 
+  /**
+   * Constructor using builder.
+   *
+   * @param b Builder
+   */
   public TextView(Builder b) {
     this.model = b.model;
     this.view = "";
@@ -83,6 +96,11 @@ public class TextView implements AMIView {
     System.out.print(model.textOutput());
   }
 
+  /**
+   * Returns text view as string.
+   *
+   * @return view
+   */
   public String getTextView() {
     return this.view;
   }

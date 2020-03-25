@@ -10,16 +10,30 @@ public final class Position {
   private final int x;
   private final int y;
 
+  /**
+   * Constructor for position.
+   */
   public Position() {
     this.x = 0;
     this.y = 0;
   }
 
+  /**
+   * Overloaded constructor for position.
+   *
+   * @param x X coordinate
+   * @param y Y coordinate
+   */
   public Position(int x, int y) {
     this.x = x;
     this.y = y;
   }
 
+  /**
+   * Copy constructor for position.
+   *
+   * @param pos Position to copy
+   */
   public Position(Position pos) {
     this.x = pos.x;
     this.y = pos.y;

@@ -63,6 +63,11 @@ public class ShapeState implements Comparable {
     return this.p;
   }
 
+  /**
+   * Returns dimensions of ShapeState
+   *
+   * @return d
+   */
   public Dimension getD() {
     return this.d;
   }
@@ -71,10 +76,20 @@ public class ShapeState implements Comparable {
     return d.getH() * d.getW();
   }
 
+  /**
+   * Returns color of ShapeState
+   *
+   * @return c
+   */
   public Color getC() {
     return this.c;
   }
 
+  /**
+   * Returns ShapeType of Shape State
+   *
+   * @return t
+   */
   public ShapeType getT() {
     return this.t;
   }
