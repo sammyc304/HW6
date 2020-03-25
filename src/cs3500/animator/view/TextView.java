@@ -83,6 +83,10 @@ public class TextView implements AMIView {
     System.out.print(model.textOutput());
   }
 
+  /**
+   * Returns a string of the text view.
+   * @return string of the text view.
+   */
   public String getTextView() {
     return this.view;
   }

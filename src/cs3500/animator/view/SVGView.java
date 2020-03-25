@@ -199,7 +199,7 @@ public class SVGView implements AMIView {
     }
     file.append("</svg>\n");
     try {
-      FileWriter myWriter = new FileWriter("src/cs3500/resources/" + out);
+      FileWriter myWriter = new FileWriter("resources/" + out);
       myWriter.write(file.toString());
       myWriter.close();
     } catch (IOException e) {

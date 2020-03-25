@@ -29,7 +29,7 @@ public class Main {
     // 4. Call playGame() on the controller.
     AnimationModelInterface model = null;
     try {
-      File f = new File("src/cs3500/resources/buildings.txt");
+      File f = new File("resources/toh-3.txt");
       Scanner read = new Scanner(f);
       while (read.hasNextLine()) {
         String data = read.nextLine();

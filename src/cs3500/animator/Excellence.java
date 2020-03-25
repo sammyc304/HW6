@@ -51,7 +51,7 @@ public final class Excellence {
       if (builder instanceof SVGView.Builder) {
         ((SVGView.Builder) builder).setOut(fileOut);
       }
-      FileReader f = new FileReader("src/cs3500/resources/" + fileName);
+      FileReader f = new FileReader(fileName);
       AMIView v = AnimationReader.parseFile(f, builder);
       v.view();
     } catch (Exception e) {

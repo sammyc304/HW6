@@ -11,6 +11,9 @@ import cs3500.model.Dimension;
 import cs3500.model.Position;
 import cs3500.model.Shape;
 
+/**
+ * Test class for the Text View.
+ */
 public class TextViewTest {
   private Shape testShapeCircle = new Shape("testShape1Circle", "rectangle");
   private BasicAMI ami1 = new BasicAMI(new Dimension(500,500),new Position(200,200),
