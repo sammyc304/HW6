@@ -102,7 +102,7 @@ public class Shape implements Comparable {
   }
 
   /**
-   * Sets a new state for the shape, taking only string inputs
+   * Sets a new state for the shape, taking only string inputs.
    *
    * @param tick1 First tick
    * @param px1   First x position
@@ -255,7 +255,7 @@ public class Shape implements Comparable {
   }
 
   /**
-   * Returns the most recent tick added
+   * Returns the most recent tick added.
    *
    * @return recentTick
    */

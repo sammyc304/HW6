@@ -51,7 +51,7 @@ public class BasicAMI implements AnimationModelInterface {
   }
 
   /**
-   * Returns dimensions of animation
+   * Returns dimensions of animation.
    *
    * @return dim
    */
@@ -60,7 +60,7 @@ public class BasicAMI implements AnimationModelInterface {
   }
 
   /**
-   * Returns position of animation
+   * Returns position of animation.
    *
    * @return pos
    */
@@ -69,7 +69,7 @@ public class BasicAMI implements AnimationModelInterface {
   }
 
   /**
-   * Returns resolution of animation
+   * Returns resolution of animation.
    *
    * @return resolution
    */
@@ -78,7 +78,7 @@ public class BasicAMI implements AnimationModelInterface {
   }
 
   /**
-   * Returns speed of animation
+   * Returns speed of animation.
    *
    * @return speed
    */

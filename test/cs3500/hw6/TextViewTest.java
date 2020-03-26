@@ -3,8 +3,6 @@ package cs3500.hw6;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-import java.awt.*;
-
 import cs3500.animator.view.TextView;
 import cs3500.model.BasicAMI;
 import cs3500.model.Dimension;

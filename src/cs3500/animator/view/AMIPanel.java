@@ -52,7 +52,7 @@ public class AMIPanel extends JPanel {
       }
       Function<ShapeState, ShapeCommand> cmd = commands.get(s.getT());
       ShapeCommand sc = cmd.apply(s);
-      sc.go(g2d);
+      sc.goExecute(g2d);
     }
   }
 }

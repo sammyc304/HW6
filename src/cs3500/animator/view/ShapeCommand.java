@@ -8,9 +8,9 @@ import java.awt.Graphics2D;
 public interface ShapeCommand {
 
   /**
-   * go makes the command execute
+   * Go makes the command execute.
    *
    * @param g Passing along the graphics object so this method can paint on a given JPanel
    */
-  void go(Graphics2D g);
+  void goExecute(Graphics2D g);
 }

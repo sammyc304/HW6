@@ -1,5 +1,5 @@
 package cs3500.hw5;
-
+/*
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.awt.Color;
 
 import cs3500.model.*;
+*/
 
 /**
  * Test suite for BasicAMI. Tests valid construction, functionality, and exceptions.

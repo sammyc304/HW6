@@ -2,12 +2,10 @@ package cs3500.hw6;
 
 import org.junit.Test;
 
-import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.stream.Stream;
 
 import cs3500.animator.view.SVGView;
@@ -28,6 +26,11 @@ public class SVGViewTest {
           1080, 10);
   private SVGView testSvgView = new SVGView(ami1, 1.1, "http://www.w3.org/2000/svg");
 
+  /**
+   * Method that facilitates testing of SVG files.
+   * @param path the path of the SCG file used for tests.
+   * @return String of the svg file.
+   */
   public String svgString(String path) {
     StringBuilder contentBuilder = new StringBuilder();
     try (Stream<String> stream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
